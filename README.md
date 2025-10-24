@@ -2,6 +2,11 @@
 
 A modern, responsive admin dashboard built with Bootstrap 5, Bootstrap Icons, and Chart.js, specifically designed for DevOps monitoring and management.
 
+## Design
+
+<img width="3360" height="2716" alt="devops-sre" src="https://github.com/user-attachments/assets/8d34a4c5-9824-4ac9-87e0-40625580da6b" />
+<img width="3360" height="3338" alt="dashboard" src="https://github.com/user-attachments/assets/d17a5651-0e13-46ee-800d-5e980cdde310" />
+
 ## Features
 
 ### 🎨 Modern Design
