@@ -1,6 +1,3 @@
-// DevOps Dashboard JavaScript
-
-// Initialize dashboard when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   initializeDashboard();
   initializeCharts();
@@ -9,18 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeNavigation();
 });
 
-// Main dashboard initialization
 function initializeDashboard() {
-  // Add loading animation
   showPageLoader();
 
-  // Simulate loading time
   setTimeout(() => {
     hidePageLoader();
     animateMetricCards();
   }, 1000);
 
-  // Initialize tooltips
   var tooltipTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
   );
@@ -29,13 +22,11 @@ function initializeDashboard() {
   });
 }
 
-// Initialize charts
 function initializeCharts() {
   createPerformanceChart();
   createResourceChart();
 }
 
-// Performance Chart (Line Chart)
 function createPerformanceChart() {
   const ctx = document.getElementById("performanceChart");
   if (!ctx) return;
@@ -144,11 +135,9 @@ function createPerformanceChart() {
     },
   });
 
-  // Store chart reference for updates
   window.performanceChart = performanceChart;
 }
 
-// Resource Usage Chart (Doughnut Chart)
 function createResourceChart() {
   const ctx = document.getElementById("resourceChart");
   if (!ctx) return;
@@ -193,23 +182,15 @@ function createResourceChart() {
     },
   });
 
-  // Store chart reference for updates
   window.resourceChart = resourceChart;
 }
 
-// Real-time updates simulation
 function initializeRealTimeUpdates() {
-  // Update metrics every 30 seconds
   setInterval(updateMetrics, 30000);
-
-  // Update charts every 5 minutes
   setInterval(updateCharts, 300000);
-
-  // Update timestamps
   setInterval(updateTimestamps, 60000);
 }
 
-// Update metric cards
 function updateMetrics() {
   const metrics = [
     {
@@ -238,10 +219,8 @@ function updateMetrics() {
   });
 }
 
-// Update charts with new data
 function updateCharts() {
   if (window.performanceChart) {
-    // Update performance chart data
     const newData = [
       generateRandomArray(7, 30, 80),
       generateRandomArray(7, 20, 60),
@@ -256,7 +235,6 @@ function updateCharts() {
   }
 
   if (window.resourceChart) {
-    // Update resource chart data
     const newResourceData = [
       Math.floor(Math.random() * 40) + 40,
       Math.floor(Math.random() * 30) + 30,
@@ -269,7 +247,6 @@ function updateCharts() {
   }
 }
 
-// Responsive features
 function initializeResponsiveFeatures() {
   const sidebar = document.getElementById("sidebar");
   const toggler = document.querySelector(".navbar-toggler");
@@ -278,8 +255,6 @@ function initializeResponsiveFeatures() {
     toggler.addEventListener("click", function () {
       sidebar.classList.toggle("show");
     });
-
-    // Close sidebar on outside click (mobile)
     document.addEventListener("click", function (e) {
       if (window.innerWidth < 992) {
         if (!sidebar.contains(e.target) && !toggler.contains(e.target)) {
@@ -288,8 +263,6 @@ function initializeResponsiveFeatures() {
       }
     });
   }
-
-  // Handle window resize
   window.addEventListener("resize", function () {
     if (window.innerWidth >= 992) {
       sidebar.classList.remove("show");
@@ -297,7 +270,6 @@ function initializeResponsiveFeatures() {
   });
 }
 
-// Utility functions
 function generateRandomUptime() {
   const uptimes = ["99.9%", "99.8%", "99.7%", "100%", "99.6%"];
   return uptimes[Math.floor(Math.random() * uptimes.length)];
@@ -409,21 +381,16 @@ function hidePageLoader() {
   }
 }
 
-// Time period buttons functionality
 document.addEventListener("click", function (e) {
   if (e.target.closest(".btn-group .btn")) {
     const button = e.target.closest(".btn");
     const group = button.closest(".btn-group");
 
-    // Remove active class from all buttons in group
     group
       .querySelectorAll(".btn")
       .forEach((btn) => btn.classList.remove("active"));
 
-    // Add active class to clicked button
     button.classList.add("active");
-
-    // Update chart data based on selection
     updateChartsForPeriod(button.textContent);
   }
 });
@@ -468,9 +435,7 @@ function updateChartsForPeriod(period) {
   window.performanceChart.update("active");
 }
 
-// Initialize navigation
 function initializeNavigation() {
-  // Set active navigation item based on current page
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = document.querySelectorAll(".sidebar .nav-link");
 
@@ -485,41 +450,27 @@ function initializeNavigation() {
 
   console.log("Current page:", currentPage);
 }
-
-// Add navigation functionality
 document.querySelectorAll(".sidebar .nav-link").forEach((link) => {
   link.addEventListener("click", function (e) {
     const href = this.getAttribute("href");
 
-    // Console log for debugging
     console.log("Navigation clicked:", href);
-
-    // Only prevent default for anchor links (starting with #)
     if (href.startsWith("#")) {
       e.preventDefault();
-
-      // Smooth scroll to section (if sections exist)
       const target = document.querySelector(href);
       if (target) {
         target.scrollIntoView({ behavior: "smooth" });
       }
-
-      // Update active state for anchor links only
       document
         .querySelectorAll(".sidebar .nav-link")
         .forEach((l) => l.classList.remove("active"));
       this.classList.add("active");
     }
-
-    // Close sidebar on mobile before navigation
     if (window.innerWidth < 992) {
       document.getElementById("sidebar").classList.remove("show");
     }
-
-    // For page navigation (not anchor links), allow default behavior
     if (!href.startsWith("#")) {
       console.log("Navigating to page:", href);
-      // The browser will handle the page navigation naturally
       return true;
     }
   });
