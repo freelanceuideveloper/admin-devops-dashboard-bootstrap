@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - DevOps Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand ms-2" href="index.html">
+                <i class="bi bi-gear-fill"></i>
+                DevOps Dashboard
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> Server alert</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle text-info"></i> Deployment complete</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle text-danger"></i> Service down</a></li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i>
+                        Franklin Roosevelt
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar light-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="bi bi-speedometer2"></i> Dashboard</h4>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="bi bi-house"></i> Overview
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="servers.html">
+                    <i class="bi bi-hdd-rack"></i> Servers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="deployments.html">
+                    <i class="bi bi-rocket-takeoff"></i> Deployments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="monitoring.html">
+                    <i class="bi bi-graph-up"></i> Monitoring
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logs.html">
+                    <i class="bi bi-journal-text"></i> Logs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="security.html">
+                    <i class="bi bi-shield-check"></i> Security
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="alerts.html">
+                    <i class="bi bi-bell"></i> Alerts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    <i class="bi bi-people"></i> Users
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- Breadcrumb -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html" class="text-decoration-none">
+                                    <i class="bi bi-house me-1"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <i class="bi bi-shield-check me-1"></i>Security
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="page-title">Security Center</h2>
+                    <p class="text-muted">Monitor security threats and system vulnerabilities</p>
+                </div>
+            </div>
+
+            <!-- Security Metrics -->
+            <div class="row mb-4">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Security Score</div>
+                                    <div class="h2 mb-0 text-success">98%</div>
+                                    <small class="text-muted">Overall security rating</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-shield-check text-success"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Threats Blocked</div>
+                                    <div class="h2 mb-0 brand-primary-text">1,247</div>
+                                    <small class="text-muted">Last 24 hours</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-shield-slash brand-primary-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Vulnerabilities</div>
+                                    <div class="h2 mb-0 text-warning">3</div>
+                                    <small class="text-muted">Critical issues</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-exclamation-triangle text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Failed Logins</div>
+                                    <div class="h2 mb-0 brand-accent-text">42</div>
+                                    <small class="text-muted">Last hour</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-person-x brand-accent-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Actions -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-shield-plus"></i> Security Actions
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-primary w-100">
+                                        <i class="bi bi-search"></i>
+                                        Vulnerability Scan
+                                    </button>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-outline-secondary w-100">
+                                        <i class="bi bi-download"></i>
+                                        Security Report
+                                    </button>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-outline-warning w-100">
+                                        <i class="bi bi-shield-x"></i>
+                                        Block IP Range
+                                    </button>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <button class="btn btn-outline-info w-100">
+                                        <i class="bi bi-gear"></i>
+                                        Security Settings
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Overview -->
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-shield-exclamation"></i> Security Incidents
+                            </h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary active">All</button>
+                                <button class="btn btn-outline-danger">Critical</button>
+                                <button class="btn btn-outline-warning">Medium</button>
+                                <button class="btn btn-outline-success">Resolved</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Incident</th>
+                                            <th>Severity</th>
+                                            <th>Source</th>
+                                            <th>Status</th>
+                                            <th>Time</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-bug text-danger me-2"></i>
+                                                    <strong>SQL Injection Attempt</strong>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-danger">Critical</span></td>
+                                            <td>192.168.1.45</td>
+                                            <td><span class="badge bg-success">Blocked</span></td>
+                                            <td>2 mins ago</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-shield-x"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-person-x text-warning me-2"></i>
+                                                    <strong>Brute Force Attack</strong>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-warning">Medium</span></td>
+                                            <td>10.0.0.234</td>
+                                            <td><span class="badge bg-primary">Monitoring</span></td>
+                                            <td>5 mins ago</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-warning">
+                                                    <i class="bi bi-exclamation-triangle"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-shield-slash text-success me-2"></i>
+                                                    <strong>Port Scan Detected</strong>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info">Low</span></td>
+                                            <td>172.16.0.89</td>
+                                            <td><span class="badge bg-success">Resolved</span></td>
+                                            <td>1 hour ago</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-pie-chart"></i> Threat Types
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="threatChart" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-shield-check"></i> Security Status
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="security-item d-flex align-items-center mb-3">
+                                <i class="bi bi-shield-check text-success me-3"></i>
+                                <div>
+                                    <strong>Firewall</strong>
+                                    <br><small class="text-success">Active - All ports secured</small>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item d-flex align-items-center mb-3">
+                                <i class="bi bi-lock text-success me-3"></i>
+                                <div>
+                                    <strong>SSL Certificates</strong>
+                                    <br><small class="text-success">Valid - Expires in 89 days</small>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item d-flex align-items-center mb-3">
+                                <i class="bi bi-shield-exclamation text-warning me-3"></i>
+                                <div>
+                                    <strong>Antivirus</strong>
+                                    <br><small class="text-warning">Needs update - 2 days old</small>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item d-flex align-items-center mb-3">
+                                <i class="bi bi-key text-success me-3"></i>
+                                <div>
+                                    <strong>2FA Authentication</strong>
+                                    <br><small class="text-success">Enabled - 95% user adoption</small>
+                                </div>
+                            </div>
+
+                            <div class="security-item d-flex align-items-center">
+                                <i class="bi bi-cloud-check text-success me-3"></i>
+                                <div>
+                                    <strong>Backup Encryption</strong>
+                                    <br><small class="text-success">AES-256 - Last backup 2h ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vulnerability Details -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-bug"></i> Vulnerability Assessment
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="vulnerability-card p-3 border rounded">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-exclamation-triangle text-danger me-2"></i>
+                                            <span class="badge bg-danger">Critical</span>
+                                        </div>
+                                        <h6>Outdated OpenSSL Library</h6>
+                                        <p class="text-muted small">Version 1.0.2 detected. Critical security vulnerabilities present.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">CVE-2021-3711</small>
+                                            <button class="btn btn-sm btn-danger">Fix Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mb-4">
+                                    <div class="vulnerability-card p-3 border rounded">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-exclamation-circle text-warning me-2"></i>
+                                            <span class="badge bg-warning">High</span>
+                                        </div>
+                                        <h6>Weak Password Policy</h6>
+                                        <p class="text-muted small">Current policy allows passwords shorter than 8 characters.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">Policy Issue</small>
+                                            <button class="btn btn-sm btn-warning">Update Policy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mb-4">
+                                    <div class="vulnerability-card p-3 border rounded">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-info-circle text-info me-2"></i>
+                                            <span class="badge bg-info">Medium</span>
+                                        </div>
+                                        <h6>Missing Security Headers</h6>
+                                        <p class="text-muted small">Some HTTP security headers are not configured properly.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">Configuration</small>
+                                            <button class="btn btn-sm btn-info">Configure</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/dashboard.js"></script>
+    <script>
+        // Threat Types Chart
+        const threatCtx = document.getElementById('threatChart');
+        if (threatCtx) {
+            new Chart(threatCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Malware', 'Phishing', 'Brute Force', 'DDoS', 'Other'],
+                    datasets: [{
+                        data: [45, 23, 18, 10, 4],
+                        backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#6f42c1']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

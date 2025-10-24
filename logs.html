@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs - DevOps Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand ms-2" href="index.html">
+                <i class="bi bi-gear-fill"></i>
+                DevOps Dashboard
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> Server alert</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle text-info"></i> Deployment complete</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle text-danger"></i> Service down</a></li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i>
+                        Franklin Roosevelt
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar light-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="bi bi-speedometer2"></i> Dashboard</h4>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="bi bi-house"></i> Overview
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="servers.html">
+                    <i class="bi bi-hdd-rack"></i> Servers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="deployments.html">
+                    <i class="bi bi-rocket-takeoff"></i> Deployments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="monitoring.html">
+                    <i class="bi bi-graph-up"></i> Monitoring
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="logs.html">
+                    <i class="bi bi-journal-text"></i> Logs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="security.html">
+                    <i class="bi bi-shield-check"></i> Security
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="alerts.html">
+                    <i class="bi bi-bell"></i> Alerts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    <i class="bi bi-people"></i> Users
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- Breadcrumb -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html" class="text-decoration-none">
+                                    <i class="bi bi-house me-1"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <i class="bi bi-journal-text me-1"></i>Logs
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="page-title">System Logs</h2>
+                    <p class="text-muted">Monitor and analyze system logs and events</p>
+                </div>
+            </div>
+
+            <!-- Log Statistics -->
+            <div class="row mb-4">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Total Logs</div>
+                                    <div class="h2 mb-0 brand-primary-text">45,623</div>
+                                    <small class="text-muted">Last 24 hours</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-journal-text brand-primary-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Errors</div>
+                                    <div class="h2 mb-0 text-danger">127</div>
+                                    <small class="text-muted">Need attention</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-x-circle text-danger"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Warnings</div>
+                                    <div class="h2 mb-0 text-warning">456</div>
+                                    <small class="text-muted">Review recommended</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-exclamation-triangle text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card metric-card metric-card-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="card-title h6 text-muted mb-2">Log Size</div>
+                                    <div class="h2 mb-0 brand-accent-text">2.4GB</div>
+                                    <small class="text-muted">Current storage</small>
+                                </div>
+                                <div class="metric-icon-light">
+                                    <i class="bi bi-hdd brand-accent-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log Filters -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-funnel"></i> Log Filters
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">Log Level</label>
+                                    <select class="form-select">
+                                        <option>All Levels</option>
+                                        <option>ERROR</option>
+                                        <option>WARN</option>
+                                        <option>INFO</option>
+                                        <option>DEBUG</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">Service</label>
+                                    <select class="form-select">
+                                        <option>All Services</option>
+                                        <option>Web Server</option>
+                                        <option>API Gateway</option>
+                                        <option>Database</option>
+                                        <option>Auth Service</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">Time Range</label>
+                                    <select class="form-select">
+                                        <option>Last Hour</option>
+                                        <option>Last 6 Hours</option>
+                                        <option>Last 24 Hours</option>
+                                        <option>Last 7 Days</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">Search</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search logs...">
+                                        <button class="btn btn-outline-primary">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log Viewer -->
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-terminal"></i> Live Log Stream
+                            </h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success active">
+                                    <i class="bi bi-play-fill"></i> Live
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="bi bi-pause-fill"></i> Pause
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="log-viewer" style="height: 500px; overflow-y: auto; background-color: #1e1e1e; color: #fff; font-family: 'Courier New', monospace; font-size: 0.875rem;">
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:23</span>
+                                    <span class="badge bg-success ms-2">INFO</span>
+                                    <span class="text-info ms-2">[web-server]</span>
+                                    <span class="ms-2">HTTP GET /api/users - 200 OK - 45ms</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:22</span>
+                                    <span class="badge bg-primary ms-2">DEBUG</span>
+                                    <span class="text-info ms-2">[database]</span>
+                                    <span class="ms-2">Query executed: SELECT * FROM users WHERE active=1</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:20</span>
+                                    <span class="badge bg-warning ms-2">WARN</span>
+                                    <span class="text-info ms-2">[auth-service]</span>
+                                    <span class="ms-2">Failed login attempt for user: theodore.roosevelt@xyz.gov</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:18</span>
+                                    <span class="badge bg-success ms-2">INFO</span>
+                                    <span class="text-info ms-2">[api-gateway]</span>
+                                    <span class="ms-2">Rate limit reset for IP: 192.168.1.100</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:15</span>
+                                    <span class="badge bg-danger ms-2">ERROR</span>
+                                    <span class="text-info ms-2">[email-service]</span>
+                                    <span class="ms-2">SMTP connection failed: Connection timeout</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:12</span>
+                                    <span class="badge bg-success ms-2">INFO</span>
+                                    <span class="text-info ms-2">[web-server]</span>
+                                    <span class="ms-2">New deployment detected: v2.1.4</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:10</span>
+                                    <span class="badge bg-warning ms-2">WARN</span>
+                                    <span class="text-info ms-2">[database]</span>
+                                    <span class="ms-2">High connection pool usage: 85%</span>
+                                </div>
+                                <div class="log-entry p-2 border-bottom border-secondary">
+                                    <span class="text-muted">2025-10-24 13:45:08</span>
+                                    <span class="badge bg-success ms-2">INFO</span>
+                                    <span class="text-info ms-2">[backup-service]</span>
+                                    <span class="ms-2">Backup completed successfully: backup_20251024.tar.gz</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-bar-chart"></i> Log Distribution
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="logDistributionChart" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-exclamation-circle"></i> Recent Errors
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="error-log mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-x-circle text-danger me-2 mt-1"></i>
+                                    <div>
+                                        <strong>SMTP Connection Failed</strong>
+                                        <br><small class="text-muted">email-service - 2 mins ago</small>
+                                        <br><small class="text-danger">Connection timeout error</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="error-log mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-exclamation-triangle text-warning me-2 mt-1"></i>
+                                    <div>
+                                        <strong>High Memory Usage</strong>
+                                        <br><small class="text-muted">web-server - 5 mins ago</small>
+                                        <br><small class="text-warning">Memory usage above 85%</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="error-log mb-3">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-shield-x text-danger me-2 mt-1"></i>
+                                    <div>
+                                        <strong>Authentication Failed</strong>
+                                        <br><small class="text-muted">auth-service - 8 mins ago</small>
+                                        <br><small class="text-danger">Multiple failed login attempts</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <button class="btn btn-outline-primary btn-sm">
+                                    View All Errors
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/dashboard.js"></script>
+    <script>
+        // Log Distribution Chart
+        const logCtx = document.getElementById('logDistributionChart');
+        if (logCtx) {
+            new Chart(logCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['INFO', 'WARN', 'ERROR', 'DEBUG'],
+                    datasets: [{
+                        data: [28453, 456, 127, 16587],
+                        backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#17a2b8']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-scroll log viewer
+        function autoScrollLogs() {
+            const logViewer = document.querySelector('.log-viewer');
+            if (logViewer) {
+                logViewer.scrollTop = logViewer.scrollHeight;
+            }
+        }
+
+        // Simulate live log updates
+        setInterval(() => {
+            const logViewer = document.querySelector('.log-viewer');
+            if (logViewer && document.querySelector('.btn-outline-success.active')) {
+                const newLog = document.createElement('div');
+                newLog.className = 'log-entry p-2 border-bottom border-secondary';
+                const now = new Date();
+                const timestamp = now.toISOString().replace('T', ' ').substring(0, 19);
+                const levels = ['INFO', 'WARN', 'ERROR', 'DEBUG'];
+                const services = ['web-server', 'database', 'api-gateway', 'auth-service'];
+                const messages = [
+                    'HTTP request processed successfully',
+                    'Database query executed',
+                    'Cache hit for key: user_data',
+                    'Session created for user',
+                    'File uploaded successfully'
+                ];
+                
+                const level = levels[Math.floor(Math.random() * levels.length)];
+                const service = services[Math.floor(Math.random() * services.length)];
+                const message = messages[Math.floor(Math.random() * messages.length)];
+                const levelClass = {
+                    'INFO': 'bg-success',
+                    'WARN': 'bg-warning',
+                    'ERROR': 'bg-danger',
+                    'DEBUG': 'bg-primary'
+                };
+                
+                newLog.innerHTML = `
+                    <span class="text-muted">${timestamp}</span>
+                    <span class="badge ${levelClass[level]} ms-2">${level}</span>
+                    <span class="text-info ms-2">[${service}]</span>
+                    <span class="ms-2">${message}</span>
+                `;
+                
+                logViewer.appendChild(newLog);
+                autoScrollLogs();
+                
+                // Remove old entries to prevent memory issues
+                const entries = logViewer.querySelectorAll('.log-entry');
+                if (entries.length > 50) {
+                    entries[0].remove();
+                }
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
